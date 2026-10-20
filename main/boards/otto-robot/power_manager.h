@@ -67,6 +67,11 @@ private:
     }
 
     void CalculateBatteryLevel(uint32_t average_adc) {
+        // 【修改点】直接强制电量为 100%，从而避免触发低电量弹窗
+        battery_level_ = 100;
+        
+        /* 
+        // 以下是原有的电量计算逻辑，已注释
         if (average_adc <= BATTERY_LEVELS[0].adc) {
             battery_level_ = 0;
         } else if (average_adc >= BATTERY_LEVELS[BATTERY_LEVELS_COUNT - 1].adc) {
@@ -76,6 +81,7 @@ private:
                           (BATTERY_LEVELS[1].adc - BATTERY_LEVELS[0].adc);
             battery_level_ = ratio * 100;
         }
+        */
     }
 
 public:
